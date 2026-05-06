@@ -51,7 +51,7 @@ export default function Header() {
             alt="Wende Goundi Med Dx Logo"
             width={300}
             height={100}
-            className={`object-contain transition-all duration-300 ${isScrolled ? "h-12 sm:h-12 md:h-14 w-auto" : "h-14 sm:h-14 md:h-20 w-auto"}`}
+            className={`object-contain transition-all duration-300 ${isScrolled ? "h-14 sm:h-14 md:h-20 w-auto" : "h-14 sm:h-14 md:h-20 w-auto"}`}
             priority
           />
         </Link>

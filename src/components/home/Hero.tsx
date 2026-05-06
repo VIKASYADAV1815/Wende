@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[calc(100vh-88px)] md:min-h-[calc(100vh-96px)] lg:min-h-[calc(100vh-112px)] flex items-center py-14 sm:py-16">
+    <section className="relative min-h-[calc(100vh-96px)] md:min-h-[calc(100vh-96px)] lg:min-h-[calc(100vh-112px)] flex items-center py-14 sm:py-16">
       <div className="absolute inset-0 z-0">
         <Image
           src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2000&auto=format&fit=crop"
@@ -14,7 +14,7 @@ export default function Hero() {
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-gray-900/40"></div>
+        <div className="absolute inset-0 bg-linear-to-r from-gray-900/90 to-gray-900/40"></div>
       </div>
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
