@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import { 
   ShieldCheck, Clock, Globe, Target, Eye, 
@@ -8,9 +8,9 @@ import {
   ArrowRight, Microscope, Zap
 } from "lucide-react";
 
-const fadeInUp = {
+const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
 export default function AboutPage() {
@@ -51,7 +51,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, scale: 0.95 }} 
               animate={{ opacity: 1, scale: 1 }} 
               transition={{ duration: 0.8 }}
-              className="relative aspect-[16/10] lg:aspect-square w-full max-w-lg ml-auto rounded-3xl overflow-hidden border-[8px] border-white shadow-2xl"
+              className="relative aspect-16/10 lg:aspect-square w-full max-w-lg ml-auto rounded-3xl overflow-hidden border-8 border-white shadow-2xl"
             >
               <Image 
                 src="https://images.unsplash.com/photo-1630959305606-3123a081dada?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
@@ -148,7 +148,7 @@ export default function AboutPage() {
             ].map((card, i) => (
               <div key={i} className="group relative h-[380px] rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
                 <Image src={card.img} alt={card.title} fill className="object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent" />
                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
                   <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-white mb-4 ${card.color}`}>
                     {card.icon}
