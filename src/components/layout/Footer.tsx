@@ -84,11 +84,15 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="text-primary-green shrink-0" size={18} />
-                <span>+226 XX XX XX XX</span> {/* Placeholder */}
+                <span>+1 (404) 936-1540</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="text-primary-green shrink-0" size={18} />
-                <span>info@wendegoundi.com</span> {/* Placeholder */}
+                <a href="mailto:info@wendegoundimedical.com" className="hover:text-primary-yellow transition-colors">info@wendegoundimedical.com</a>
+              </li>
+              <li className="flex items-center gap-3">
+                <ArrowRight className="text-primary-green shrink-0" size={18} />
+                <a href="https://www.wendegoundimedical.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary-yellow transition-colors">www.wendegoundimedical.com</a>
               </li>
             </ul>
           </div>

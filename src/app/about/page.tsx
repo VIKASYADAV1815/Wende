@@ -5,7 +5,7 @@ import Image from "next/image";
 import { 
   ShieldCheck, Clock, Globe, Target, Eye, 
   CheckCircle2, Stethoscope, Users, Award,
-  ArrowRight, Microscope, Zap
+  ArrowRight, Microscope, Zap, HeartPulse, Activity
 } from "lucide-react";
 
 const fadeInUp: Variants = {
@@ -14,36 +14,46 @@ const fadeInUp: Variants = {
 };
 
 export default function AboutPage() {
+  const coreAreas = [
+    { title: "Pathology & Histopathology Equipment", icon: <Microscope /> },
+    { title: "Immunohistochemistry (IHC) Systems & Reagents", icon: <Zap /> },
+    { title: "Laboratory Equipment & Consumables", icon: <CheckCircle2 /> },
+    { title: "Dialysis Equipment & Water Treatment Systems", icon: <Activity /> },
+    { title: "Operating Room & Hospital Infrastructure", icon: <HeartPulse /> },
+    { title: "Technical Support & Biomedical Services", icon: <Stethoscope /> }
+  ];
+
   return (
-    <div className="min-h-screen bg-white text-[#1a1a1a] selection:bg-primary-red/10 relative">
+    <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-primary-red/10 relative overflow-hidden">
       
-      {/* --- REINFORCED INDUSTRIAL GRID PATTERN --- */}
-      {/* This ensures the pattern is visible but doesn't distract from the content */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.05]" 
+      {/* Subtle Pattern BG */}
+      <div className="fixed inset-0 z-0 opacity-[0.02] pointer-events-none" 
         style={{ 
-          backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l20 20-20 20L0 20z' fill='%23000' fill-rule='evenodd'/%3E%3C/svg%3E")`, 
           backgroundSize: '40px 40px' 
-        }} 
-      />
+        }}>
+      </div>
 
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-32 pb-20 z-10">
-        <div className="container mx-auto px-6">
+      <section className="relative pt-32 pb-16 z-10">
+        <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded mb-8">
-                <Zap size={12} className="text-primary-red" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">The Wende Goundi Standard</span>
+              <div className="inline-flex items-center gap-2 mb-6 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-sm">
+                <span className="text-[10px] font-bold tracking-widest uppercase text-slate-600">About Wende Goundi</span>
+                <div className="flex gap-1">
+                  <span className="h-1.5 w-1.5 bg-primary-red rounded-full"></span>
+                  <span className="h-1.5 w-1.5 bg-primary-yellow rounded-full"></span>
+                  <span className="h-1.5 w-1.5 bg-primary-green rounded-full"></span>
+                </div>
               </div>
               
-              <h1 className="text-5xl lg:text-7xl font-bold tracking-tighter leading-[0.95] mb-8">
-                Empowering <br /> 
-                <span className="text-primary-red italic">Healthcare</span> <br /> 
-                Through <span className="text-primary-green">Precision.</span>
+              <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1] mb-6 text-slate-900">
+                Empowering <span className="text-primary-green">Modern Healthcare</span> in West Africa
               </h1>
               
-              <p className="text-base text-slate-500 max-w-md leading-relaxed">
-                Wende Goundi Medical Tech & Diagnostic Solutions is dedicated to improving healthcare infrastructure and diagnostic capacity across Burkina Faso and the wider West African region.
+              <p className="text-sm md:text-base text-slate-600 leading-relaxed max-w-lg">
+                Wende Goundi Medical Tech & Diagnostic Solutions Company is a healthcare technology and diagnostic solutions company based in Ouagadougou, Burkina Faso, dedicated to improving access to modern medical infrastructure, diagnostic systems, and specialized healthcare equipment.
               </p>
             </motion.div>
 
@@ -51,18 +61,24 @@ export default function AboutPage() {
               initial={{ opacity: 0, scale: 0.95 }} 
               animate={{ opacity: 1, scale: 1 }} 
               transition={{ duration: 0.8 }}
-              className="relative aspect-16/10 lg:aspect-square w-full max-w-lg ml-auto rounded-3xl overflow-hidden border-8 border-white shadow-2xl"
+              className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden shadow-xl border-4 border-white"
             >
               <Image 
-                src="https://images.unsplash.com/photo-1630959305606-3123a081dada?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                alt="Laboratory Excellence" 
+                src="/infra.png" 
+                alt="Medical Laboratory" 
                 fill 
-                className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="object-cover"
               />
-              <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur p-4 rounded-xl border border-white/20">
-                <div className="flex items-center gap-4">
-                  <Microscope className="text-primary-green" size={24} />
-                  <p className="text-[10px] font-bold uppercase tracking-widest leading-tight">Clinically Validated <br/> Global Technology</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-white/50 shadow-sm flex items-center gap-4">
+                  <div className="w-10 h-10 bg-primary-green/10 rounded-full flex items-center justify-center text-primary-green">
+                    <Microscope size={20} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-slate-900">Advanced Diagnostics</p>
+                    <p className="text-[11px] text-slate-500 font-medium">Clinically Validated Technology</p>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -70,92 +86,110 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* --- STORY SECTION (THE "ABOUT" CORE) --- */}
-      <section className="py-24 relative z-10 border-y border-slate-100 bg-white/60 backdrop-blur-sm">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-5">
-              <span className="text-primary-red font-bold text-xs uppercase tracking-widest">Leadership</span>
-              <h2 className="text-3xl font-bold mt-4 mb-6">Building Platforms, <br /> Not Just Products.</h2>
-              <p className="text-slate-500 text-sm leading-relaxed mb-8">
-                Under the leadership of <strong>Christopher Moghalu</strong>, we address the demand for reliable medical technology by building long-term partnerships with reputable international manufacturers.
+      {/* --- OUR APPROACH --- */}
+      <section className="py-16 relative z-10">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-red via-primary-yellow to-primary-green" />
+            
+            <div className="grid md:grid-cols-2 gap-12 items-start">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold mb-6 text-slate-900">Sustainable Healthcare Solutions</h2>
+                <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
+                  <p>
+                    We specialize in pathology, immunohistochemistry (IHC), laboratory diagnostics, dialysis solutions, hospital infrastructure, and medical technology support services. We work with international manufacturers and healthcare partners to provide reliable, high-quality medical equipment and consumables tailored to the needs of healthcare institutions in emerging markets.
+                  </p>
+                  <p>
+                    At Wende Goundi, we believe healthcare modernization requires more than simply supplying equipment. Our approach focuses on building sustainable healthcare solutions through equipment distribution, installation, technical support, maintenance services, training, and long-term partnership development.
+                  </p>
+                  <p className="font-semibold text-slate-800">
+                    We are committed to supporting hospitals, laboratories, clinics, diagnostic centers, NGOs, and public health institutions with solutions that improve efficiency, diagnostic accuracy, and patient care outcomes.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="bg-slate-50 rounded-2xl p-8 border border-slate-100">
+                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-6 flex items-center gap-2">
+                  <Target size={16} className="text-primary-red" /> Core Areas of Focus
+                </h3>
+                <ul className="space-y-3">
+                  {coreAreas.map((area, idx) => (
+                    <motion.li 
+                      key={idx} 
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.05 }}
+                      className="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-slate-100"
+                    >
+                      <div className="text-primary-green shrink-0">{area.icon}</div>
+                      <span className="text-xs font-semibold text-slate-700">{area.title}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- MISSION & VISION --- */}
+      <section className="py-16 z-10 relative">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="grid md:grid-cols-2 gap-6">
+            <motion.div 
+              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+              className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 relative overflow-hidden group"
+            >
+              <div className="w-12 h-12 bg-red-50 text-primary-red rounded-xl flex items-center justify-center mb-6 border border-red-100">
+                <Target size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-slate-900">Our Mission</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                As healthcare systems continue to expand across West Africa, our mission is to help bridge the gap between advanced medical technology and local healthcare needs by delivering dependable, affordable, and sustainable medical solutions.
               </p>
-              <div className="p-6 border-l-2 border-primary-yellow bg-slate-50/50 italic text-slate-700 font-medium">
-                "We are building a long-term medical technology platform, not simply looking for products to trade."
-              </div>
-            </div>
+            </motion.div>
 
-            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4">
-              <div className="p-8 bg-white border border-slate-100 rounded-2xl shadow-sm">
-                <Target className="text-primary-red mb-4" size={28} />
-                <h3 className="font-bold mb-2">Our Mission</h3>
-                <p className="text-xs text-slate-500 leading-relaxed">Providing cutting-edge, validated diagnostic equipment that empowers healthcare providers.</p>
+            <motion.div 
+              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
+              className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 relative overflow-hidden group"
+            >
+              <div className="w-12 h-12 bg-green-50 text-primary-green rounded-xl flex items-center justify-center mb-6 border border-green-100">
+                <Eye size={24} />
               </div>
-              <div className="p-8 bg-white border border-slate-100 rounded-2xl shadow-sm">
-                <Eye className="text-primary-green mb-4" size={28} />
-                <h3 className="font-bold mb-2">Our Vision</h3>
-                <p className="text-xs text-slate-500 leading-relaxed">To be the most trusted and reliable medical technology partner in West Africa.</p>
-              </div>
-            </div>
+              <h3 className="text-xl font-bold mb-3 text-slate-900">Our Vision</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Our vision is to become a trusted leader in diagnostic and medical technology solutions throughout Burkina Faso and the wider West African region through innovation, quality service, and strategic global partnerships. We are committed to advancing healthcare infrastructure and supporting the future of modern medicine in Africa.
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* --- SERVICES (HIGH-DENSITY GRID) --- */}
-      <section className="py-24 z-10">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
-            <h2 className="text-4xl font-bold tracking-tighter">Capabilities</h2>
-            <div className="h-px flex-1 bg-slate-100 mx-8 hidden md:block" />
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Wende Goundi Solutions</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: "Distribution", icon: <Globe />, color: "text-primary-red" },
-              { title: "Tech Support", icon: <Stethoscope />, color: "text-primary-green" },
-              { title: "Capacity Building", icon: <Users />, color: "text-primary-yellow" },
-              { title: "Consumables", icon: <CheckCircle2 />, color: "text-slate-900" }
-            ].map((item, i) => (
-              <div key={i} className="p-8 bg-white border border-slate-100 rounded-2xl hover:border-primary-red transition-all group">
-                <div className={`${item.color} mb-6 transition-transform group-hover:scale-110`}>{item.icon}</div>
-                <h4 className="font-bold mb-2 text-sm">{item.title}</h4>
-                <p className="text-[11px] text-slate-400 leading-relaxed">Ensuring top-tier medical infrastructure with comprehensive local support.</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --- WHY US (DEEP NEUTRAL BLACK - NO BLUE) --- */}
-      <section className="py-24 bg-[#0a0a0a] text-white relative overflow-hidden z-10">
-        {/* Subtle texture for dark section */}
-        <div className="absolute inset-0 opacity-[0.1]" 
-          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='1'/%3E%3C/g%3E%3C/svg%3E")` }} 
-        />
+      {/* --- COMMITMENT --- */}
+      <section className="py-20 bg-slate-900 text-white relative z-10 mt-8">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-red via-primary-yellow to-primary-green" />
         
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Why Partner With Us</h2>
-            <p className="text-slate-500 text-sm">We are committed to sustainable healthcare development.</p>
+        <div className="container mx-auto px-6 max-w-5xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Our Commitment</h2>
+            <p className="text-slate-400 text-sm max-w-2xl mx-auto">
+              Partnering for sustainable healthcare development across West Africa.
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: "Quality Assured", icon: <ShieldCheck />, color: "bg-primary-green", img: "https://images.unsplash.com/photo-1582719508461-905c673771fd" },
-              { title: "24/7 Support", icon: <Clock />, color: "bg-primary-red", img: "https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-              { title: "Global Reach", icon: <Globe />, color: "bg-primary-yellow", img: "https://images.unsplash.com/photo-1576086213369-97a306d36557" }
+              { title: "Quality Assured", icon: <ShieldCheck />, color: "text-primary-green bg-green-500/10" },
+              { title: "Reliable Support", icon: <Clock />, color: "text-primary-red bg-red-500/10" },
+              { title: "Strategic Partnerships", icon: <Globe />, color: "text-primary-yellow bg-yellow-500/10" }
             ].map((card, i) => (
-              <div key={i} className="group relative h-[380px] rounded-2xl overflow-hidden border border-white/5 shadow-2xl">
-                <Image src={card.img} alt={card.title} fill className="object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-700" />
-                <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent" />
-                <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-white mb-4 ${card.color}`}>
-                    {card.icon}
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">{card.title}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">Clinically validated diagnostic equipment from world-leading brands.</p>
+              <div key={i} className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50 text-center hover:bg-slate-800 transition-colors">
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 ${card.color}`}>
+                  {card.icon}
                 </div>
+                <h3 className="text-base font-bold text-white mb-2">{card.title}</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">Delivering dependable and affordable medical solutions tailored to local needs.</p>
               </div>
             ))}
           </div>
