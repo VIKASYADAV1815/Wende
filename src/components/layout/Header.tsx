@@ -5,29 +5,26 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ChevronDown, PhoneCall } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "About Us", href: "/about" },
-  {
-    name: "Solutions",
-    href: "#",
-    subLinks: [
-      { name: "Pathology & IHC", href: "/solutions/pathology-ihc" },
-      { name: "Laboratory Equipment", href: "/solutions/laboratory-equipment" },
-      { name: "Dialysis Solutions", href: "/solutions/dialysis" },
-      { name: "Hospital Infrastructure", href: "/solutions/hospital-infrastructure" },
-      { name: "Technical Support", href: "/solutions/technical-support" },
-    ],
-  },
-  { name: "Projects", href: "/projects" },
-  { name: "Contact", href: "/contact" },
-];
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const { copy } = useLanguage();
+
+  const navLinks = [
+    { key: "home", name: copy.nav.home, href: "/" },
+    { key: "about", name: copy.nav.about, href: "/about" },
+    {
+      key: "solutions",
+      name: copy.nav.solutions,
+      href: "#",
+      subLinks: copy.nav.solutionItems.map((item) => ({ name: item.label, href: item.href }))
+    },
+    { key: "projects", name: copy.nav.projects, href: "/projects" },
+    { key: "contact", name: copy.nav.contact, href: "/contact" }
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -106,7 +103,7 @@ export default function Header() {
             className="bg-primary-red hover:bg-red-700 text-white px-6 py-2 rounded-full font-medium transition-colors flex items-center gap-2 shadow-lg shadow-red-500/30"
           >
             <PhoneCall size={18} />
-            <span>Get a Quote</span>
+            <span>{copy.nav.quote}</span>
           </Link>
         </div>
 
@@ -114,7 +111,7 @@ export default function Header() {
         <button
           className="lg:hidden text-gray-800 p-2 shrink-0"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-label={isMobileMenuOpen ? copy.nav.closeMenu : copy.nav.openMenu}
           aria-expanded={isMobileMenuOpen}
         >
           {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -162,7 +159,7 @@ export default function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <PhoneCall size={18} />
-                <span>Contact Us Now</span>
+                <span>{copy.nav.contactNow}</span>
               </Link>
             </div>
           </motion.div>

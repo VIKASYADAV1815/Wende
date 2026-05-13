@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Wrench, PhoneCall, Clock, CheckCircle2, ShieldAlert, ArrowRight, Settings } from "lucide-react";
 import Link from "next/link";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -11,6 +12,9 @@ const fadeIn = {
 };
 
 export default function TechnicalSupportPage() {
+  const { copy } = useLanguage();
+  const page = copy.solutionPages.technicalSupport;
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 pb-20">
       {/* Hero Section */}
@@ -33,16 +37,16 @@ export default function TechnicalSupportPage() {
           >
             <div className="inline-flex items-center gap-2 mb-6 bg-primary-green/20 backdrop-blur-md px-4 py-2 rounded-full border border-primary-green/30">
               <Wrench size={16} className="text-green-300" />
-              <span className="text-xs font-bold tracking-widest uppercase text-green-100">Service & Maintenance</span>
+              <span className="text-xs font-bold tracking-widest uppercase text-green-100">{page.badge}</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
-              Technical Support & <span className="text-primary-green">Biomedical Services</span>
+              {page.titleStart} <span className="text-primary-green">{page.titleAccent}</span>
             </h1>
             <p className="text-lg text-slate-200 mb-8 leading-relaxed">
-              Maximizing equipment uptime and extending the lifespan of your critical medical infrastructure with expert installation, training, and 24/7 technical support.
+              {page.intro}
             </p>
             <Link href="/contact" className="inline-flex items-center gap-2 bg-primary-green hover:bg-green-700 text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg shadow-green-500/30">
-              Request Service <ArrowRight size={18} />
+              {page.cta} <ArrowRight size={18} />
             </Link>
           </motion.div>
         </div>
@@ -53,9 +57,9 @@ export default function TechnicalSupportPage() {
         <div className="container mx-auto px-6 max-w-6xl">
           
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-3xl font-bold mb-4 text-slate-900">Comprehensive Lifecycle Management</h2>
+            <h2 className="text-3xl font-bold mb-4 text-slate-900">{page.overviewTitle}</h2>
             <p className="text-slate-600 leading-relaxed">
-              We understand that in healthcare, equipment failure is not an option. Our certified biomedical engineering team provides end-to-end service solutions to keep your clinical operations running smoothly.
+              {page.overviewDescription}
             </p>
           </div>
 
@@ -63,22 +67,22 @@ export default function TechnicalSupportPage() {
             {[
               {
                 icon: <Settings size={32} />,
-                title: "Installation & Commissioning",
-                desc: "Professional site preparation, installation, and rigorous calibration to ensure equipment meets manufacturer specifications from day one.",
+                title: page.services[0].title,
+                desc: page.services[0].description,
                 color: "text-blue-500",
                 bg: "bg-blue-50"
               },
               {
                 icon: <Clock size={32} />,
-                title: "Preventive Maintenance",
-                desc: "Scheduled maintenance programs designed to identify and resolve potential issues before they cause costly downtime.",
+                title: page.services[1].title,
+                desc: page.services[1].description,
                 color: "text-primary-green",
                 bg: "bg-green-50"
               },
               {
                 icon: <PhoneCall size={32} />,
-                title: "24/7 Emergency Repair",
-                desc: "Rapid response technical support and on-site repair services for critical life-support and diagnostic equipment.",
+                title: page.services[2].title,
+                desc: page.services[2].description,
                 color: "text-primary-red",
                 bg: "bg-red-50"
               }
@@ -101,17 +105,17 @@ export default function TechnicalSupportPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div 
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 bg-slate-900"
+              className="relative w-full aspect-video md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 bg-slate-900"
             >
               <Image src="/3.jpg" alt="Training Session" fill className="object-cover opacity-80" />
             </motion.div>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <h2 className="text-3xl font-bold mb-4 text-slate-900">Clinical Application Training</h2>
+              <h2 className="text-3xl font-bold mb-4 text-slate-900">{page.trainingTitle}</h2>
               <p className="text-slate-600 mb-6 leading-relaxed">
-                Technology is only as effective as the professionals using it. We provide comprehensive clinical application and technical training programs for doctors, nurses, and laboratory technicians. Our training ensures your staff is confident, efficient, and capable of utilizing all advanced features of your new equipment.
+                {page.trainingDescription}
               </p>
               <ul className="space-y-3">
-                {["On-site Clinical Staff Training", "Biomedical Technician Workshops", "Operational Safety Protocols", "Software & IT Integration Support"].map((item, i) => (
+                {page.trainingItems.map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-sm font-medium text-slate-700">
                     <CheckCircle2 size={18} className="text-primary-green" /> {item}
                   </li>
@@ -128,10 +132,10 @@ export default function TechnicalSupportPage() {
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-red via-primary-yellow to-primary-green" />
         <div className="container mx-auto px-6 relative z-10 text-center max-w-3xl">
           <ShieldAlert size={48} className="text-primary-yellow mx-auto mb-6" />
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Need Immediate Technical Assistance?</h2>
-          <p className="text-slate-300 mb-8 text-lg">Our certified engineers are on standby to resolve your equipment issues rapidly and efficiently.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">{page.urgentTitle}</h2>
+          <p className="text-slate-300 mb-8 text-lg">{page.urgentDescription}</p>
           <Link href="/contact" className="inline-flex items-center gap-2 bg-primary-red hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg shadow-red-500/30">
-            Contact Support Hotline <PhoneCall size={18} />
+            {page.urgentCta} <PhoneCall size={18} />
           </Link>
         </div>
       </section>

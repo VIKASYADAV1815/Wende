@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Microscope, Activity, ShieldCheck, Zap, ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -11,6 +12,9 @@ const fadeIn = {
 };
 
 export default function PathologyPage() {
+  const { copy } = useLanguage();
+  const page = copy.solutionPages.pathology;
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 pb-20">
       {/* Hero Section */}
@@ -33,16 +37,16 @@ export default function PathologyPage() {
           >
             <div className="inline-flex items-center gap-2 mb-6 bg-primary-red/20 backdrop-blur-md px-4 py-2 rounded-full border border-primary-red/30">
               <Microscope size={16} className="text-red-300" />
-              <span className="text-xs font-bold tracking-widest uppercase text-red-100">Diagnostic Excellence</span>
+              <span className="text-xs font-bold tracking-widest uppercase text-red-100">{page.badge}</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
-              Pathology & <span className="text-primary-red">IHC Solutions</span>
+              {page.titleStart} <span className="text-primary-red">{page.titleAccent}</span>
             </h1>
             <p className="text-lg text-slate-200 mb-8 leading-relaxed">
-              Empowering laboratories with state-of-the-art histopathology equipment, precision microtomes, and automated Immunohistochemistry (IHC) systems for accurate diagnostics.
+              {page.intro}
             </p>
             <Link href="/contact" className="inline-flex items-center gap-2 bg-primary-red hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg shadow-red-500/30">
-              Request a Consultation <ArrowRight size={18} />
+              {page.cta} <ArrowRight size={18} />
             </Link>
           </motion.div>
         </div>
@@ -56,17 +60,27 @@ export default function PathologyPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center mb-24">
             <motion.div 
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="relative aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-slate-200"
+              className="flex flex-col gap-4"
             >
-              <Image src="/pathelogy/p5.jpg" alt="Precision Microtome" fill className="object-cover" />
+              <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-lg border border-slate-200/60">
+                <Image src="/pathelogy/p5.jpg" alt="Precision Microtome" fill className="object-cover object-top" />
+              </div>
+              <div className="flex gap-4">
+                <div className="relative w-1/2 aspect-video rounded-3xl overflow-hidden shadow-lg border border-slate-200/60">
+                  <Image src="/pathelogy/unnamed (1).jpg" alt="Lab Detail" fill className="object-cover" />
+                </div>
+                <div className="relative w-1/2 aspect-video rounded-3xl overflow-hidden shadow-lg border border-slate-200/60">
+                  <Image src="/pathelogy/p1.jpg" alt="Lab Detail 2" fill className="object-cover" />
+                </div>
+              </div>
             </motion.div>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <h2 className="text-3xl font-bold mb-4 text-slate-900">Precision Tissue Sectioning</h2>
+              <h2 className="text-3xl font-bold mb-4 text-slate-900">{page.sections[0].title}</h2>
               <p className="text-slate-600 mb-6 leading-relaxed">
-                High-quality diagnostics begin with perfect tissue sections. We provide industry-leading rotary microtomes and cryostats designed for precise, consistent sectioning of paraffin-embedded and frozen tissue samples. Our equipment ensures laboratory technicians can achieve optimal slide preparation with enhanced safety and ergonomic comfort.
+                {page.sections[0].description}
               </p>
               <ul className="space-y-3">
-                {["Automated & Semi-Automated Microtomes", "Advanced Cryostats for Frozen Sections", "Blade Holders & Consumables", "Ergonomic Tissue Processing Workstations"].map((item, i) => (
+                {page.sections[0].items?.map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-sm font-medium text-slate-700">
                     <CheckCircle2 size={18} className="text-primary-red" /> {item}
                   </li>
@@ -78,12 +92,12 @@ export default function PathologyPage() {
           {/* Feature 2 */}
           <div className="grid md:grid-cols-2 gap-12 items-center mb-24">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="order-2 md:order-1">
-              <h2 className="text-3xl font-bold mb-4 text-slate-900">Automated Immunohistochemistry (IHC)</h2>
+              <h2 className="text-3xl font-bold mb-4 text-slate-900">{page.sections[1].title}</h2>
               <p className="text-slate-600 mb-6 leading-relaxed">
-                Standardize your staining processes and improve diagnostic confidence with our automated IHC and in situ hybridization (ISH) systems. We supply advanced autostainers that deliver crisp, intense stains with minimal background, reducing hands-on time and ensuring reproducible results across all patient samples.
+                {page.sections[1].description}
               </p>
               <ul className="space-y-3">
-                {["High-Throughput Autostainers", "Primary Antibodies & Detection Kits", "Optimized Reagents & Buffers", "Digital Pathology Integration"].map((item, i) => (
+                {page.sections[1].items?.map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-sm font-medium text-slate-700">
                     <CheckCircle2 size={18} className="text-primary-green" /> {item}
                   </li>
@@ -92,7 +106,7 @@ export default function PathologyPage() {
             </motion.div>
             <motion.div 
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="relative aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 order-1 md:order-2"
+              className="relative w-full aspect-video md:aspect-[4/3] rounded-3xl overflow-hidden shadow-lg border border-slate-200/60 order-1 md:order-2"
             >
               <Image src="/pathelogy/p7.jpg" alt="Automated IHC System" fill className="object-cover" />
             </motion.div>
@@ -102,27 +116,35 @@ export default function PathologyPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div 
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="relative aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 grid grid-cols-2 grid-rows-2 gap-2 p-2 bg-white"
+              className="flex flex-col gap-4"
             >
-              <div className="relative rounded-2xl overflow-hidden"><Image src="/pathelogy/p2.jpg" alt="Slides" fill className="object-cover" /></div>
-              <div className="relative rounded-2xl overflow-hidden"><Image src="/pathelogy/p3.jpg" alt="Tissue Embedding" fill className="object-cover" /></div>
-              <div className="relative rounded-2xl overflow-hidden col-span-2"><Image src="/pathelogy/unnamed.jpg" alt="Microscopy" fill className="object-cover" /></div>
+              <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-lg border border-slate-200/60">
+                <Image src="/pathelogy/unnamed.jpg" alt="Microscopy" fill className="object-cover" />
+              </div>
+              <div className="flex gap-4">
+                <div className="relative w-1/2 aspect-video rounded-3xl overflow-hidden shadow-lg border border-slate-200/60">
+                  <Image src="/pathelogy/p2.jpg" alt="Slides" fill className="object-cover" />
+                </div>
+                <div className="relative w-1/2 aspect-video rounded-3xl overflow-hidden shadow-lg border border-slate-200/60">
+                  <Image src="/pathelogy/p3.jpg" alt="Tissue Embedding" fill className="object-cover" />
+                </div>
+              </div>
             </motion.div>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-              <h2 className="text-3xl font-bold mb-4 text-slate-900">Complete Histology Workflow</h2>
+              <h2 className="text-3xl font-bold mb-4 text-slate-900">{page.sections[2].title}</h2>
               <p className="text-slate-600 mb-6 leading-relaxed">
-                From grossing and embedding to staining and coverslipping, we equip pathology labs with everything needed for a seamless workflow. Our comprehensive solutions include high-grade consumables, embedding centers, and automated coverslippers to maintain specimen integrity from surgery to diagnosis.
+                {page.sections[2].description}
               </p>
               <div className="grid grid-cols-2 gap-4 mt-8">
                 <div className="bg-slate-100 p-4 rounded-2xl border border-slate-200">
                   <ShieldCheck size={24} className="text-primary-yellow mb-2" />
-                  <h4 className="font-bold text-slate-900 text-sm">Quality Assured</h4>
-                  <p className="text-xs text-slate-500 mt-1">Validated reagents and materials.</p>
+                  <h4 className="font-bold text-slate-900 text-sm">{page.highlights[0].title}</h4>
+                  <p className="text-xs text-slate-500 mt-1">{page.highlights[0].description}</p>
                 </div>
                 <div className="bg-slate-100 p-4 rounded-2xl border border-slate-200">
                   <Zap size={24} className="text-primary-red mb-2" />
-                  <h4 className="font-bold text-slate-900 text-sm">Efficient Processing</h4>
-                  <p className="text-xs text-slate-500 mt-1">Accelerated turnaround times.</p>
+                  <h4 className="font-bold text-slate-900 text-sm">{page.highlights[1].title}</h4>
+                  <p className="text-xs text-slate-500 mt-1">{page.highlights[1].description}</p>
                 </div>
               </div>
             </motion.div>

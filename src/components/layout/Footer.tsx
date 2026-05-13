@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, MapPin, Phone, ArrowRight } from "lucide-react";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function Footer() {
+  const { copy } = useLanguage();
+
   return (
     <footer className="bg-gray-900 text-white pt-16 pb-8 border-t-4 border-primary-green">
       <div className="container mx-auto px-4 md:px-6">
@@ -19,7 +24,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Improving healthcare infrastructure and diagnostic capacity across Burkina Faso and the wider West African region. We provide reliable medical technology and specialized diagnostic equipment.
+              {copy.footer.description}
             </p>
           </div>
 
@@ -27,17 +32,17 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
               <span className="w-4 h-1 bg-primary-red rounded-full"></span>
-              Quick Links
+              {copy.footer.quickLinksTitle}
             </h3>
             <ul className="space-y-3 text-sm text-gray-400">
-              {["Home", "About Us", "Projects", "Contact Us"].map((link) => (
-                <li key={link}>
+              {copy.footer.quickLinks.map((link) => (
+                <li key={link.href}>
                   <Link
-                    href={link === "Home" ? "/" : `/${link.toLowerCase().replace(" ", "-")}`}
+                    href={link.href}
                     className="hover:text-primary-yellow transition-colors flex items-center gap-2 group"
                   >
                     <ArrowRight size={14} className="text-primary-green group-hover:text-primary-yellow transition-colors" />
-                    {link}
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -48,23 +53,17 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
               <span className="w-4 h-1 bg-primary-yellow rounded-full"></span>
-              Our Solutions
+              {copy.footer.solutionsTitle}
             </h3>
             <ul className="space-y-3 text-sm text-gray-400">
-              {[
-                "Pathology & IHC",
-                "Laboratory Equipment",
-                "Dialysis Solutions",
-                "Hospital Infrastructure",
-                "Technical Support",
-              ].map((link) => (
-                <li key={link}>
+              {copy.nav.solutionItems.map((link) => (
+                <li key={link.href}>
                   <Link
-                    href={`/solutions/${link.toLowerCase().replace(/ & | /g, "-")}`}
+                    href={link.href}
                     className="hover:text-primary-yellow transition-colors flex items-center gap-2 group"
                   >
                     <ArrowRight size={14} className="text-primary-green group-hover:text-primary-yellow transition-colors" />
-                    {link}
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -75,7 +74,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
               <span className="w-4 h-1 bg-primary-green rounded-full"></span>
-              Contact Us
+              {copy.footer.contactTitle}
             </h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li className="flex items-start gap-3">
@@ -88,7 +87,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="text-primary-green shrink-0" size={18} />
-                <a href="mailto:info@wendegoundimedical.com" className="hover:text-primary-yellow transition-colors">info@wendegoundimedical.com</a>
+                <a href="mailto:cm@wendegoundimedical.com" className="hover:text-primary-yellow transition-colors">cm@wendegoundimedical.com</a>
               </li>
               <li className="flex items-center gap-3">
                 <ArrowRight className="text-primary-green shrink-0" size={18} />
@@ -101,14 +100,14 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} Wende Goundi Medical Tech & Diagnostic Solutions. All rights reserved.
+            &copy; {new Date().getFullYear()} {copy.footer.copyright}
           </p>
           <div className="flex items-center gap-1 text-sm font-medium">
-            <span className="text-primary-green">CARE</span>
+            <span className="text-primary-green">{copy.footer.values[0]}</span>
             <span className="text-primary-yellow mx-1">•</span>
-            <span className="text-primary-green">DIAGNOSE</span>
+            <span className="text-primary-green">{copy.footer.values[1]}</span>
             <span className="text-primary-yellow mx-1">•</span>
-            <span className="text-primary-green">HEAL</span>
+            <span className="text-primary-green">{copy.footer.values[2]}</span>
           </div>
         </div>
       </div>
